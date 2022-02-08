@@ -7,5 +7,5 @@ curl -d '{"jsonrpc":"2.0","id":"1","method":"createwallet", "params": ["w3"]}' -
 btc=$(curl -d '{"jsonrpc":"2.0","id":"1","method":"getnewaddress", "params": []}' -u btc:btc localhost:18443/wallet/w1 | jq .result)
 btc2=$(curl -d '{"jsonrpc":"2.0","id":"1","method":"getnewaddress", "params": []}' -u btc:btc localhost:18443/wallet/w2 | jq .result)
 
-echo "BTC mining: ${btc}"
-echo "BTC second: ${btc2}"
+echo "MINING_ADDRESS: ${btc}"
+echo "SECOND_ADDRESS: ${btc2}"

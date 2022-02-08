@@ -8,8 +8,8 @@ curl -d '{"jsonrpc":"2.0","id":"1","method":"disconnectnode", "params":["bitcoin
 
 curl -d '{"jsonrpc":"2.0","id":"1","method":"getpeerinfo", "params":[]}' -u btc:btc localhost:28443 | jq
 
-curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["ADDRESS2_HERE", 0.345]}' -u btc:btc localhost:18443/wallet/w1
-curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["ADDRESS2_HERE", 0.245]}' -u btc:btc localhost:18443/wallet/w1
-curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["ADDRESS2_HERE", 0.445]}' -u btc:btc localhost:18443/wallet/w1
+curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["SECOND_ADDRESS", 0.345]}' -u btc:btc localhost:18443/wallet/w1
+curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["SECOND_ADDRESS", 0.245]}' -u btc:btc localhost:18443/wallet/w1
+curl -d '{"jsonrpc":"2.0","id":"1","method":"sendtoaddress", "params":["SECOND_ADDRESS", 0.445]}' -u btc:btc localhost:18443/wallet/w1
 
-curl -d '{"jsonrpc":"2.0","id":"1","method":"generatetoaddress", "params":[1, "ADDRESS_HERE"]}' -u btc:btc localhost:18443/wallet/w1
+curl -d '{"jsonrpc":"2.0","id":"1","method":"generatetoaddress", "params":[1, "MINING_ADDRESS"]}' -u btc:btc localhost:18443/wallet/w1
