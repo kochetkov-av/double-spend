@@ -1,0 +1,74 @@
+version: "3"
+
+services:
+
+  bitcoin:
+    image: ruimarinho/bitcoin-core:alpine
+    ports:
+      - "18443:18443"
+    command:
+      -printtoconsole
+      -regtest
+      -rpcauth='btc:9cd88b070f00d57a0bdbfbcc31cb0008$$7d80d4fca52cfc293b2311933b8a9d83dbdbc773a228c6dcf0b34743d9efb146'
+      -fallbackfee=0.00001
+      -rpcallowip=0.0.0.0/0
+      -rpcbind=0.0.0.0
+
+  bitcoin2:
+    image: ruimarinho/bitcoin-core:alpine
+    ports:
+      - "28443:18443"
+    command:
+      -printtoconsole
+      -regtest
+      -rpcauth='btc:9cd88b070f00d57a0bdbfbcc31cb0008$$7d80d4fca52cfc293b2311933b8a9d83dbdbc773a228c6dcf0b34743d9efb146'
+      -fallbackfee=0.00001
+      -rpcallowip=0.0.0.0/0
+      -rpcbind=0.0.0.0
+
+  bitcoin-explorer:
+    image: getumbrel/btc-rpc-explorer:v3.1.1
+    ports:
+      - "3001:3002"
+    environment:
+      - BTCEXP_HOST=0.0.0.0
+      - BTCEXP_BITCOIND_HOST=bitcoin
+      - BTCEXP_BITCOIND_PORT=18443
+      - BTCEXP_BITCOIND_USER=btc
+      - BTCEXP_BITCOIND_PASS=btc
+      - BTCEXP_BITCOIND_RPC_TIMEOUT=5000
+      - BTCEXP_BASIC_AUTH_PASSWORD=btc
+
+
+  bitcoin-explorer2:
+    image: getumbrel/btc-rpc-explorer:v3.1.1
+    ports:
+      - "3002:3002"
+    environment:
+      - BTCEXP_HOST=0.0.0.0
+      - BTCEXP_BITCOIND_HOST=bitcoin2
+      - BTCEXP_BITCOIND_PORT=18443
+      - BTCEXP_BITCOIND_USER=btc
+      - BTCEXP_BITCOIND_PASS=btc
+      - BTCEXP_BITCOIND_RPC_TIMEOUT=5000
+      - BTCEXP_BASIC_AUTH_PASSWORD=btc
+
+  bitcoin-blockbook:
+    image: kochetkov/blockbook:dev
+    restart: always
+    depends_on:
+      - bitcoin
+    ports:
+      - "9130:9130"
+    volumes:
+      - ./blockbook.json:/opt/blockbook/blockchaincfg.json
+
+  bitcoin-blockbook2:
+    image: kochetkov/blockbook:dev
+    restart: always
+    depends_on:
+      - bitcoin
+    ports:
+      - "9131:9130"
+    volumes:
+      - ./blockbook2.json:/opt/blockbook/blockchaincfg.json
